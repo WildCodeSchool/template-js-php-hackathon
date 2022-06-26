@@ -5,7 +5,7 @@ body {
 }
 
 .hello {
-  animation: App-logo-spin infinite 5s linear;
+  animation: App-logo-spin infinite 15s linear;
   font-size: 15em;
 }
 

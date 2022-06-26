@@ -1,4 +1,5 @@
 const Encore = require("@symfony/webpack-encore")
+const BrowserSyncPlugin = require("browser-sync-webpack-plugin")
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -45,10 +46,10 @@ Encore
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
 
-  //   .configureBabel((config) => {
-  //     config.plugins.push("@babel/plugin-proposal-class-properties")
-  //     config.plugins.push("@babel/plugin-syntax-jsx")
-  //   })
+  .configureBabel((config) => {
+    config.plugins.push("@babel/plugin-proposal-class-properties")
+    config.plugins.push("@babel/plugin-syntax-jsx")
+  })
 
   // enables @babel/preset-env polyfills
   .configureBabelPresetEnv((config) => {
@@ -64,6 +65,40 @@ Encore
 
   // uncomment if you use React
   .enableReactPreset()
+  .addPlugin(
+    new BrowserSyncPlugin(
+      {
+        host: "localhost",
+        port: 3000,
+        proxy: "http://127.0.0.1:8000",
+        files: [
+          {
+            match: ["src/*.php"],
+          },
+          {
+            match: ["templates/*.twig"],
+          },
+          {
+            match: ["assets/*.js"],
+          },
+          {
+            match: ["assets/*.jsx"],
+          },
+          {
+            match: ["assets/*.css"],
+          },
+          {
+            match: ["assets/*.scss"],
+          },
+        ],
+        notify: false,
+      },
+
+      {
+        reload: true,
+      }
+    )
+  )
 
 // uncomment to get integrity="..." attributes on your script & link tags
 // requires WebpackEncoreBundle 1.4 or higher
