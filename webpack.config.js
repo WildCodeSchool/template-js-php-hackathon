@@ -1,5 +1,4 @@
 const Encore = require("@symfony/webpack-encore")
-const BrowserSyncPlugin = require("browser-sync-webpack-plugin")
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -65,41 +64,6 @@ Encore
 
   // uncomment if you use React
   .enableReactPreset()
-  .addPlugin(
-    new BrowserSyncPlugin(
-      {
-        host: "localhost",
-        port: 3000,
-        proxy: "http://127.0.0.1:8000",
-        files: [
-          {
-            match: ["src/*.php"],
-          },
-          {
-            match: ["templates/*.twig"],
-          },
-          {
-            match: ["assets/*.js"],
-          },
-          {
-            match: ["assets/*.jsx"],
-          },
-          {
-            match: ["assets/*.css"],
-          },
-          {
-            match: ["assets/*.scss"],
-          },
-        ],
-        notify: false,
-      },
-
-      {
-        reload: true,
-      }
-    )
-  )
-
 // uncomment to get integrity="..." attributes on your script & link tags
 // requires WebpackEncoreBundle 1.4 or higher
 //.enableIntegrityHashes(Encore.isProduction())
@@ -107,15 +71,16 @@ Encore
 // uncomment if you're having problems with a jQuery plugin
 //.autoProvidejQuery()
 
-const fullConfig = Encore.getWebpackConfig();
+const fullConfig = Encore.getWebpackConfig()
 fullConfig.devServer = {
-    headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
-    },
-    watchFiles: {
-        paths: ['templates/**/*.html.twig']
-    }
-};
-module.exports = fullConfig;
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+    "Access-Control-Allow-Headers":
+      "X-Requested-With, content-type, Authorization",
+  },
+  watchFiles: {
+    paths: ["templates/**/*.html.twig"],
+  },
+}
+module.exports = fullConfig
