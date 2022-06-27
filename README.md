@@ -29,7 +29,7 @@ $ symfony server:start
 (you must run the php server before the node server, else proxy doesn't work)
 
 ```shell
-$ yarn encore dev --watch
+$ yarn encore dev-server
 ```
 
 Nb: to add more and more packages use [yarn](https://yarnpkg.com/) instead of npm
