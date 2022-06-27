@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_main')]
+    #[Route('/{slug}', name: 'app_main_slug', requirements: ['slug' => '.+'], priority: -1)]
     public function index(): Response
     {
         return $this->render('main/index.html.twig');
